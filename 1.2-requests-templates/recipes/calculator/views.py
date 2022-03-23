@@ -1,3 +1,4 @@
+from django.http import HttpResponse
 from django.shortcuts import render
 
 DATA = {
@@ -28,3 +29,42 @@ DATA = {
 #     'ингредиент2': количество2,
 #   }
 # }
+
+
+def omlet_view(request):
+    servings = int(request.GET.get('servings', 1))
+    temp_dict = DATA['omlet'].copy()
+
+    for key, value in temp_dict.items():
+        temp_dict[key] = temp_dict[key] * servings
+
+    context = {
+        'recipe': temp_dict
+    }
+    return render(request, 'calculator/index.html', context)
+
+
+def pasta_view(request):
+    servings = int(request.GET.get('servings', 1))
+    temp_dict = DATA['pasta'].copy()
+
+    for key, value in temp_dict.items():
+        temp_dict[key] = temp_dict[key] * servings
+
+    context = {
+        'recipe': temp_dict
+    }
+    return render(request, 'calculator/index.html', context)
+
+
+def buter_view(request):
+    servings = int(request.GET.get('servings', 1))
+    temp_dict = DATA['buter'].copy()
+
+    for key, value in temp_dict.items():
+        temp_dict[key] = temp_dict[key] * servings
+
+    context = {
+        'recipe': temp_dict
+    }
+    return render(request, 'calculator/index.html', context)
